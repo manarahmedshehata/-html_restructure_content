@@ -67,6 +67,9 @@ def build_section(header):
 			if next.name.lower() > header.name.lower():
 				#this header has subsection
 				print("next is subsection")
+				#build subsections array in section_obj if it is not exist
+				if not 'subsections' in section_obj:
+                    section_obj['subsections'] = []
 				section = build_section(next)
 				section['subsection'] = next.get_text()
 				section_obj['subsections'].append(section)
