@@ -20,7 +20,7 @@ def restructure_content(filename):
 		]
 		}
 	"""
-	output_json = {'sections': []}
+	output_obj = {'sections': []}
 
 	try:
 		file = open(filename, encoding="utf8")
@@ -44,7 +44,7 @@ def restructure_content(filename):
 				print("#########################################")
 				section['section'] = next.get_text()
 
-				output_json['sections'].append(section)
+				output_obj['sections'].append(section)
 
 				next = last
 				# print("################# Print Section ########################")
