@@ -47,16 +47,6 @@ def restructure_content(filename):
 				print("################# Print next ########################")
 				print(next)
 				print("#########################################")
-
-
-
-
-
-		"""
-		if html_content.find_next(re.compile("^h")) != None:
-			print(html_content.find_next(re.compile("^h")))
-			build_section(html_content.find_next(re.compile("^h")))
-		"""
 	finally:
 		file.close()
 
@@ -78,10 +68,14 @@ def build_section(header):
 				#this header has subsection
 				print("next is subsection")
 				section = build_section(next)
+				section['subsection'] = next.get_text()
+				section_obj['subsections'].append(section)
+				print(section_obj)
 			else:
 				break
 		else:
 			print("next is not header")
+			#
 			next = next.find_next()
 	return section_obj
 
