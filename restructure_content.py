@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 
 from pprint import pprint
 import re
+import json
 
 def restructure_content(filename):
 	#schema
@@ -58,6 +59,9 @@ def restructure_content(filename):
 	finally:
 		file.close()
 
+	#
+	return json.dumps(output_obj)
+
 def build_section(header):
 	#section_obj to build output_json
 	print("build section function")
@@ -99,6 +103,10 @@ def build_section(header):
 	return section_obj, next
 
 
-restructure_content('../inputs/5bd6c00d652cfa3480dff05398d0e4b6')
 
+output = restructure_content('../inputs/5bd6c00d652cfa3480dff05398d0e4b6')
+
+print("#########final output############3")
+print(output)
+print("#########################################")
 
