@@ -90,16 +90,13 @@ def build_section(header):
 				break
 		else:
 			print("next is not header")
-			#
+			#build paragraphs
+			#build paragraphs array in section_obj if it is not exist
+			if not 'paragraphs' in section_obj:
+				section_obj['paragraphs'] = []
+			section_obj['paragraphs'].append(next.get_text())
 			next = next.find_next()
 	return section_obj, next
-
-
-
-
-
-
-	print(header.find_next())
 
 
 restructure_content('../inputs/5bd6c00d652cfa3480dff05398d0e4b6')
