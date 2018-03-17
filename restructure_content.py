@@ -38,7 +38,15 @@ def restructure_content(filename):
 			#check if next is header
 			if re.match("^h", next.name):
 				print("next is header")
-				section = build_section(next)
+				section, last = build_section(next)
+				print("################# Print last ########################")
+				print(last)
+				print("#########################################")
+				section['section'] = next.get_text()
+
+				output_json['sections'].append(section)
+
+				next = last
 				# print("################# Print Section ########################")
 				# print(section)
 				# print("#########################################")
@@ -69,20 +77,22 @@ def build_section(header):
 				print("next is subsection")
 				#build subsections array in section_obj if it is not exist
 				if not 'subsections' in section_obj:
-                    section_obj['subsections'] = []
-				section = build_section(next)
+					section_obj['subsections'] = []
+				section, last = build_section(next)
 				section['subsection'] = next.get_text()
 				section_obj['subsections'].append(section)
 				print("#########next in build_section############3")
 				print(section_obj)
 				print("#########################################")
+
+				next = last
 			else:
 				break
 		else:
 			print("next is not header")
 			#
 			next = next.find_next()
-	return section_obj
+	return section_obj, next
 
 
 
