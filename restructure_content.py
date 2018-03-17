@@ -39,14 +39,14 @@ def restructure_content(filename):
 			if re.match("^h", next.name):
 				print("next is header")
 				section = build_section(next)
-				print("################# Print Section ########################")
-				print(section)
-				print("#########################################")
+				# print("################# Print Section ########################")
+				# print(section)
+				# print("#########################################")
 			else:
 				next = next.find_next()
-				print("################# Print next ########################")
-				print(next)
-				print("#########################################")
+				# print("################# Print next ########################")
+				# print(next)
+				# print("#########################################")
 	finally:
 		file.close()
 
@@ -55,9 +55,9 @@ def build_section(header):
 	print("build section function")
 	section_obj= {}
 	next=header.find_next()
-	print("#########next in build_section############3")
-	print(next)
-	print("#########################################")
+	# print("#########next in build_section############3")
+	# print(next)
+	# print("#########################################")
 	while True:
 		if not next:
 			break
@@ -73,7 +73,9 @@ def build_section(header):
 				section = build_section(next)
 				section['subsection'] = next.get_text()
 				section_obj['subsections'].append(section)
+				print("#########next in build_section############3")
 				print(section_obj)
+				print("#########################################")
 			else:
 				break
 		else:
