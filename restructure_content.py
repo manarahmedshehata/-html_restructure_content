@@ -4,6 +4,8 @@ from pprint import pprint
 import re
 import json
 
+headingRegex="^[hH][1-7]"
+
 def restructure_content(filename):
 	#schema
 	"""
@@ -26,7 +28,11 @@ def restructure_content(filename):
 	try:
 		file = open(filename, encoding="utf8")
 		# print(file)
-		parsed_html = BeautifulSoup(file.read(), "html.parser")
+		try:
+			parsed_html = BeautifulSoup(file.read(), "html.parser")
+		except:
+			parsed_html = BeautifulSoup(file.read(), "html5lib")
+
 		html_content=parsed_html.body.find('div', attrs={'class':'body searchable-content'}) 
 		next=html_content.find_next()
 		#print("################### Print Next ######################")
@@ -35,7 +41,7 @@ def restructure_content(filename):
 		while next:
 			print("while")
 			#check if next is header
-			if re.match("^h", next.name):
+			if re.match(headingRegex, next.name):
 				print("next is header")
 				section, last = build_section(next)
 				print("################# Print last ########################")
@@ -71,7 +77,7 @@ def build_section(header):
 	# print("#########################################")
 	while next:
 		#Check if next is header or not
-		if re.match("^h", next.name):
+		if re.match("headingRegex", next.name):
 			#check if next is section or sub section
 			if next.name.lower() > header.name.lower():
 				#this header has subsection
