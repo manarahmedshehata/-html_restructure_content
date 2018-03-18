@@ -32,15 +32,14 @@ def restructure_content(filename):
 		#print("################### Print Next ######################")
 		#print(next)
 		#print("#########################################")
-		while True:
+		while next:
 			print("while")
-			if not next:
-				break
 			#check if next is header
 			if re.match("^h", next.name):
 				print("next is header")
 				section, last = build_section(next)
 				print("################# Print last ########################")
+				print
 				print(last)
 				print("#########################################")
 				section['section'] = next.get_text()
@@ -70,9 +69,7 @@ def build_section(header):
 	# print("#########next in build_section############3")
 	# print(next)
 	# print("#########################################")
-	while True:
-		if not next:
-			break
+	while next:
 		#Check if next is header or not
 		if re.match("^h", next.name):
 			#check if next is section or sub section
